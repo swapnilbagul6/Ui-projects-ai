@@ -1,0 +1,15 @@
+<div
+  class="relative bg-gray-800 border rounded-lg shadow-lg overflow-hidden transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-cyan-500/30 cursor-pointer"
+  [class.border-cyan-400]="isSelected()"
+  [class.border-gray-700]="!isSelected()">
+
+  <div class="h-48 flex items-center justify-center p-6 bg-gray-100">
+    <!-- The [innerHTML] directive is safe here because the HTML content is
+         statically defined in our own trusted service. -->
+    <div class="w-full" [innerHTML]="classInfo().htmlExample"></div>
+  </div>
+
+  <div class="p-4 bg-gray-800/50">
+    <h3 class="font-semibold text-white truncate">{{ classInfo().name }}</h3>
+  </div>
+</div>

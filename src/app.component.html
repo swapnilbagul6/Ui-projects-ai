@@ -1,0 +1,61 @@
+<div class="flex flex-col md:flex-row h-screen bg-gray-900 text-gray-200 font-sans">
+  <!-- Left Sidebar: Category Navigation -->
+  <aside class="w-full md:w-64 bg-gray-950 p-4 overflow-y-auto border-r border-gray-800 flex-shrink-0">
+    <header class="text-center mb-8">
+      <h1 class="text-2xl font-extrabold tracking-tight">
+        <span class="bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text">
+          Bootstrap Visualizer
+        </span>
+      </h1>
+      <p class="text-xs text-gray-500 mt-1">Interactive Class Guide</p>
+    </header>
+    <nav>
+      <ul>
+        @for (category of classCategories(); track category.name) {
+          <li>
+            <button
+              (click)="selectCategory(category)"
+              class="w-full text-left p-3 rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800"
+              [class.bg-gray-800]="category === selectedCategory()"
+              [class.text-white]="category === selectedCategory()">
+              <span class="font-semibold">{{ category.name }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content: Class Grid -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+    @if (selectedCategory(); as category) {
+      <section>
+        <div class="border-b border-gray-700 pb-4 mb-8">
+          <h2 class="text-3xl font-bold text-white">{{ category.name }}</h2>
+          <p class="text-gray-400 mt-1">{{ category.description }}</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          @for (item of category.items; track item.name) {
+            <div (click)="selectClass(item)">
+              <app-class-card 
+                [classInfo]="item"
+                [isSelected]="item === selectedClass()">
+              </app-class-card>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </main>
+
+  <!-- Right Sidebar: Details Panel -->
+  <aside class="w-full md:w-96 bg-gray-950 p-4 sm:p-6 lg:p-8 overflow-y-auto border-l border-gray-800 flex-shrink-0">
+    @if (selectedClass(); as class) {
+      <app-details-panel [classInfo]="class"></app-details-panel>
+    } @else {
+      <div class="flex items-center justify-center h-full">
+        <p class="text-gray-500">Select an item to see details</p>
+      </div>
+    }
+  </aside>
+</div>

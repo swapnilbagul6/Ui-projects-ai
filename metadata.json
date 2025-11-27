@@ -1,0 +1,5 @@
+{
+  "name": "Bootstrap Class Visualizer",
+  "description": "An interactive visual guide to Bootstrap CSS classes. Hover over elements to see class details and usage examples, all presented in a sleek interface styled with Tailwind CSS.",
+  "requestFramePermissions": []
+}
